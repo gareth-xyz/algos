@@ -19,6 +19,14 @@ def min_b(x):
             min_num=i
     return min_num
 
+def x_y(nums):
+    pos = 1
+    for i in range(1,len(nums)):
+        if nums[i] != nums[i-1]:
+            print('X i:{} pos:{}'.format(i, pos))
+            nums[pos] = nums[i]
+            pos += 1
+    return nums
+
 if __name__ == "__main__":
-    print(min_a([1,2,3,4,5]))
-    print(min_b([1,2,3,4,5]))
+    print( x_y( [1,1,2,2,3,3] ) )
