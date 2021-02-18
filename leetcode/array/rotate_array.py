@@ -21,6 +21,6 @@ def rotate(nums, k):
     k = k % n
     nums[:] = nums[n-k:] + nums[:n-k]
 
-
+    
 if __name__ == '__main__':
     rotate( [1,2,3,4,5], 2 )
