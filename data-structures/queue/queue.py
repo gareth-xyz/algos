@@ -1,15 +1,22 @@
-class Queue:
-    def __init__(self):
-        self.items = []
+from abc import ABC, abstractmethod
+class Queue(ABC):
 
-    def isEmpty(self):
-        return self.items == []
+    @abstractmethod
+    def is_empty(self):
+        pass
 
-    def enqueue(self, item):
-        self.items.insert(0, item)
+    @abstractmethod
+    def offer(self, elem):
+        pass
 
-    def dequeue(self):
-        return self.items.pop()
+    @abstractmethod
+    def poll(self):
+        pass
 
+    @abstractmethod
+    def peek(self):
+        pass
+
+    @abstractmethod
     def size(self):
-        return len(self.items)
+        pass
