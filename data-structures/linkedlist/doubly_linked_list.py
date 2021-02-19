@@ -3,6 +3,7 @@ class DoublyLinkedList:
         self.head = None
         self.tail = None
         self.size = 0
+        self.travIter = None
 
     def __len__(self):
         return self.size
@@ -85,7 +86,41 @@ class DoublyLinkedList:
 
         return -1
 
-class Node:
-    def __init__(self):
-        self.prev = None
-        self.next = None
+    def __iter__(self): 
+        """
+        Called when iteration is initialized
+        """
+        self.travIter = self.head
+        return self
+
+    def __next__(self): 
+        """
+        To move to next element. 
+        """
+        # Stop iteration if limit is reached 
+        if self.travIter is None:
+            raise StopIteration
+        
+        # Store current travIter.data 
+        data = self.travIter.data
+        self.travIter = self.travIter.next
+    
+        # Else increment and return old value 
+        return data
+
+    def peek_last(self):
+        """ 
+        Check the value of the last node if it exists, O(1)
+        """ 
+        if self.is_empty():
+            raise Exception('Empty list')
+        return self.tail.data
+
+class Node(object):
+    def __init__(self, data, prev, next): 
+        self.data = data
+        self.prev = prev
+        self.next = next
+
+    def __repr__(self):
+        return str(self.data)
