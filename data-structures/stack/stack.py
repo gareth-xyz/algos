@@ -1,18 +1,22 @@
-class Stack:
-    def __init__(self):
-        self.items = []
-
+from abc import ABC, abstractmethod
+class Stack(ABC):
+    
+    @abstractmethod
     def isEmpty(self):
-        return self.items == []
+        pass
 
-    def push(self, item):
-        self.items.append(item)
+    @abstractmethod
+    def push(self, elem):
+        pass
 
+    @abstractmethod
     def pop(self):
-        return self.items.pop()
+        pass
 
+    @abstractmethod
     def peek(self):
-        return self.items[-1]
+        pass
 
+    @abstractmethod
     def size(self):
-        return len(self.items)
+        pass
