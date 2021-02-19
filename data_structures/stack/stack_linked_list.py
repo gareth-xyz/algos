@@ -1,5 +1,5 @@
 from stack import Stack
-from linkedlist.doubly_linked_list import DoublyLinkedList
+from data_structures.linkedlist.doubly_linked_list import DoublyLinkedList
 
 class ListStack(Stack):
 

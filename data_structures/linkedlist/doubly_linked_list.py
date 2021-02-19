@@ -36,13 +36,18 @@ class DoublyLinkedList:
 
     def remove_head(self):
         # O(1)
-        if self.head.next:
-            self.head = self.head.next
-            self.head.prev = None
-        else:
-            self.head = None
-            self.tail = None
+        if self.isEmpty():
+            raise Exception('Empty list')
+        data = self.head.data
+        self.head = self.head.next
         self.size -= 1
+
+        if self.is_empty():
+            self.tail = None
+        else:
+            self.head.prev = None
+        
+        return data
 
     def remove_tail(self, node):
         # O(1)
@@ -115,6 +120,14 @@ class DoublyLinkedList:
         if self.is_empty():
             raise Exception('Empty list')
         return self.tail.data
+
+    def peek_first(self):
+        """ 
+        Check the value of the last node if it exists, O(1)
+        """ 
+        if self.is_empty():
+            raise Exception('Empty list')
+        return self.head.data
 
 class Node(object):
     def __init__(self, data, prev, next): 
