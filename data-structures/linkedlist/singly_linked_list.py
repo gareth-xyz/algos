@@ -1,6 +1,6 @@
 class LinkedList:
-    def __init__(self, node):
-        self.head = node
+    def __init__(self):
+        self.head = None
         self.size = 0
 
     def __len__(self):
@@ -45,11 +45,19 @@ class LinkedList:
     def remove_tail(self, node):
         # O(n)
         if self.is_empty():
-            raise 
+            raise Exception('empty')
         else:
-            node = Node(elem, self.head)
-            self.head = node
-        self.size += 1
+            # traverse the list to find tail, and remove
+            trav = self.head
+            prev = None
+            while trav.next is not None:
+                prev = trav
+                trav = trav.next    
+            if prev:
+                prev.next = None
+            else:
+                self.head = None
+        self.size -= 1
 
     def clear(self):
         # O(n)
