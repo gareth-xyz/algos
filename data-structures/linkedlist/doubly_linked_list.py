@@ -1,7 +1,8 @@
-class LinkedList:
+class DoublyLinkedList:
     def __init__(self):
         pass
 
 class Node:
     def __init__(self):
-        pass
+        self.prev = None
+        self.next = None
