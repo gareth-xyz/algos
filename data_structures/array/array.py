@@ -80,4 +80,4 @@ class DynamicArray:
         self.capacity = new_cap # Reset the capacity
 
     def make_array(self, new_cap):
-        return (new_cap * ctpyes.py_object)()
+        return (new_cap * ctypes.py_object)()
