@@ -58,13 +58,52 @@ class BinaryTree:
                 queue.append(temp.left)
                 queue.append(temp.right)
 
-    def delete(self, root, elem):
+    def delete(self, elem):
         """ removes an element from the tree - replaces with bottom-right most node """
-        if self.search(root, elem):
-            # perform delete
-            pass
+        if self.search(elem):
+            queue = deque()
+            queue.append(self.root)
+
+            while len(queue)>0:
+                temp = queue.popleft()
+
+                if temp.val == elem:
+                    target = temp
+
+                if temp.left:
+                    queue.append(temp.left)
+
+                if temp.right:
+                    queue.append(temp.right)
+
+            target.val = temp.val
+            # delete deepest/right most
+            print('----in delete')
+            print(temp)
+            self.delete_deepest(temp)
+            return True
         else:
             return False
+
+    def _delete_deepest(self, del_node):
+        """ deletes the deepest, right most node """
+        queue = deque()
+        queue.append(self.root)
+
+        while len(queue):
+            temp = queue.popleft()
+
+            if temp.left == del_node:
+                temp.left = None
+                return
+            else:
+                queue.append(temp.left)
+
+            if temp.right == del_node:
+                temp.right = None
+                return
+            else:
+                queue.append(temp.right)
 
     def search(self, elem):
         """ public function to search for an element in the tree """
@@ -77,9 +116,9 @@ class BinaryTree:
         
         if root.val == elem:
             return True
-
-        self._search(root.left, elem)
-        self._search(root.right, elem)
+        else:
+            self._search(root.left, elem)
+            self._search(root.right, elem)
 
     def traverse(self, traverse_type):
         """ traverses the tree by the given type """
@@ -132,10 +171,10 @@ class BinaryTree:
             node = queue.popleft()
             print(node.val)
 
-            if node.left is not None:
+            if node.left:
                 queue.append(node.left)    
 
-            if node.right is not None:
+            if node.right:
                 queue.append(node.right)
 
 
@@ -149,8 +188,12 @@ def main():
     binary_tree.root.right.left = Node(6)
     binary_tree.root.right.right = Node(7)
     binary_tree.traverse( TreeTraversalOrder.LEVEL_ORDER )
-    binary_tree.search(7)
+    print(binary_tree.search(7))
+    print('*********** insert ')
     binary_tree.insert(8)
+    binary_tree.traverse( TreeTraversalOrder.LEVEL_ORDER )
+    print('*********** delete')
+    binary_tree.delete(8)
     binary_tree.traverse( TreeTraversalOrder.LEVEL_ORDER )
 
 if __name__ == '__main__':
