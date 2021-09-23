@@ -77,11 +77,7 @@ class BinaryTree:
                     queue.append(temp.right)
 
             target.val = temp.val
-            # delete deepest/right most
-            print('----in delete')
-            print(temp)
-            self.delete_deepest(temp)
-            return True
+            self._delete_deepest(temp)
         else:
             return False
 
@@ -116,9 +112,11 @@ class BinaryTree:
         
         if root.val == elem:
             return True
-        else:
-            self._search(root.left, elem)
-            self._search(root.right, elem)
+            
+        res_l = self._search(root.left, elem)
+        res_r = self._search(root.right, elem)
+        
+        return any([res_l, res_r])
 
     def traverse(self, traverse_type):
         """ traverses the tree by the given type """
@@ -188,10 +186,11 @@ def main():
     binary_tree.root.right.left = Node(6)
     binary_tree.root.right.right = Node(7)
     binary_tree.traverse( TreeTraversalOrder.LEVEL_ORDER )
-    print(binary_tree.search(7))
+    print(binary_tree.search(11))
     print('*********** insert ')
     binary_tree.insert(8)
     binary_tree.traverse( TreeTraversalOrder.LEVEL_ORDER )
+    print(binary_tree.search(8))
     print('*********** delete')
     binary_tree.delete(8)
     binary_tree.traverse( TreeTraversalOrder.LEVEL_ORDER )
