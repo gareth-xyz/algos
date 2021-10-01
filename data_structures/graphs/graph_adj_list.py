@@ -3,6 +3,8 @@ Graph implementation
     class Graph - adjacency list
 """
 
+from collections import deque
+
 class Graph:
     """
     Graph implementation using an adjacency list
@@ -91,9 +93,24 @@ class Graph:
             return True
         return False
 
-    def level_order_traversal(self):
+    def bfs_traversal(self, node):
         """ traverses graph level-order -  """
-        pass
+        self._bfs(node)
+
+    def _bfs(self, node):
+        """ helper method to BFS graph """
+        visited = [node]
+        queue = deque()
+        queue.append(node)
+
+        while queue:
+            node = queue.popleft()
+            print(node)
+            
+            for neighbour in self.graph_dict[node]:
+                if neighbour not in visited:
+                    queue.append(neighbour)
+                    visited.append(neighbour)
 
     def dfs_traversal(self, node):
         """ traverses graph in a dfs style - O(V+E) """
@@ -124,6 +141,9 @@ if __name__ == '__main__':
     g.add_vertex(3)
     g.add_vertex(4)
     g.add_vertex(5)
+    g.add_vertex(6)
+    g.add_vertex(7)
+    g.add_vertex(8)
 
     # add
     print('Adding edges...')
@@ -133,9 +153,15 @@ if __name__ == '__main__':
     g.add_edge([2,5])
     g.add_edge([3,4])
     g.add_edge([3,5])
+    g.add_edge([5,6])
+    g.add_edge([6,7])
+    g.add_edge([7,8])
 
     # traversal
     print('*** DFS ***')
+    g.dfs_traversal(0)
+    
+    print('*** BFS ***')
     g.dfs_traversal(0)
 
     # show
@@ -156,17 +182,21 @@ if __name__ == '__main__':
     print( g.all_vertices() )
 
     # delete
-    print('***Delete vertex 1:***')
-    print( g.delete_vertex(1) )
-    print('***Has vertex 1?:***')
-    print( g.has_vertex(1) )
-    print('***Has edge 0,1?:***')
-    print( g.has_edge([0,1]) )
-    print('***Delete edge 3,5:***')
-    print( g.delete_edge([3,5]) )
-    print('***Has edge 3,5?:***')
-    print( g.has_edge([3,5]) )
+    # print('***Delete vertex 1:***')
+    # print( g.delete_vertex(1) )
+    # print('***Has vertex 1?:***')
+    # print( g.has_vertex(1) )
+    # print('***Has edge 0,1?:***')
+    # print( g.has_edge([0,1]) )
+    # print('***Delete edge 3,5:***')
+    # print( g.delete_edge([3,5]) )
+    # print('***Has edge 3,5?:***')
+    # print( g.has_edge([3,5]) )
 
     # traversal
     print('*** DFS ***')
     g.dfs_traversal(0)
+    
+    print('*** BFS ***')
+    g.dfs_traversal(0)
+    
