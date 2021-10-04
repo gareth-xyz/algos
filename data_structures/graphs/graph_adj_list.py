@@ -162,7 +162,7 @@ if __name__ == '__main__':
     g.dfs_traversal(0)
     
     print('*** BFS ***')
-    g.dfs_traversal(0)
+    g.bfs_traversal(0)
 
     # show
     print('***Has edge?***')
@@ -198,5 +198,5 @@ if __name__ == '__main__':
     g.dfs_traversal(0)
     
     print('*** BFS ***')
-    g.dfs_traversal(0)
+    g.bfs_traversal(0)
     

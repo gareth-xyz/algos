@@ -25,8 +25,8 @@ class GraphMatrix:
         """ add an edge between two vertices """
         if not self.has_edge(edge):
             v1, v2 = edge
-            self.graph_matrix[v1][v2]
-            self.graph_matrix[v2][v1]
+            self.graph_matrix[v1][v2] = 1
+            self.graph_matrix[v2][v1] = 1
             return True
         return False
 
@@ -48,36 +48,39 @@ class GraphMatrix:
         return False
 
     def bfs_traversal(self, node):
-        """ traverses graph level-order -  """
+        """ traverses graph level-order -  O(v^2) """
         self._bfs(node)
 
-    # def _bfs(self, node):
-    #     """ helper method to BFS graph """
-    #     visited = [node]
-    #     queue = deque()
-    #     queue.append(node)
+    def _bfs(self, node):
+        """ helper method to BFS graph """
+        visited = [node]
+        queue = deque()
+        queue.append(node)
 
-    #     while queue:
-    #         node = queue.popleft()
-    #         print(node)
-            
-    #         for neighbour in self.graph_matrix[node]:
-    #             if neighbour not in visited:
-    #                 queue.append(neighbour)
-    #                 visited.append(neighbour)
+        while queue:
+            node = queue.popleft()
+            print(node)
 
-    # def dfs_traversal(self, node):
-    #     """ traverses graph in a dfs style - O(V+E) """
-    #     visited = set()
-    #     self._dfs(visited, node)
+            for i in range(len(self.graph_matrix)):
+                temp = self.graph_matrix[node][i]
+                if temp != 0 and i not in visited:
+                    queue.append(i)
+                    visited.append(i)
 
-    # def _dfs(self, visited, node):
-    #     """ helper method to recursively DFS graph """
-    #     if node not in visited:
-    #         print(node)
-    #         visited.add(node)
-    #         for neighbour in self.graph_dict[node]:
-    #             self._dfs(visited,neighbour)
+    def dfs_traversal(self, node):
+        """ traverses graph in a dfs style - O(v^2) """
+        visited = set()
+        self._dfs(visited, node)
+
+    def _dfs(self, visited, node):
+        """ helper method to recursively DFS graph """
+        if node not in visited:
+            print(node)
+            visited.add(node)
+
+            for i in range(len(self.graph_matrix[node])):
+                if self.graph_matrix[node][i] != 0:
+                    self._dfs(visited,i)
 
 
 if __name__ == '__main__':
@@ -88,7 +91,7 @@ if __name__ == '__main__':
     # |  /
     # | /
     # 5
-    g = GraphMatrix(5)
+    g = GraphMatrix(6)
 
     # add
     print('Adding edges...')
@@ -98,26 +101,22 @@ if __name__ == '__main__':
     g.add_edge([2,5])
     g.add_edge([3,4])
     g.add_edge([3,5])
-    g.add_edge([5,6])
-    g.add_edge([6,7])
-    g.add_edge([7,8])
-
     # show
     print('***Has edge?***')
     print( g.has_edge([5,3]) )
     
-    # delete edge
+    #delete edge
     print('***Delete edge: 5,3:***')
     print( g.delete_edge([5,3]) )
 
-    # show
+    # # show
     print('***Has edge?***')
     print( g.has_edge([5,3]) )
 
-    # traversal
+    # # traversal
     print('*** DFS ***')
     g.dfs_traversal(0)
     
     print('*** BFS ***')
-    g.dfs_traversal(0)
+    g.bfs_traversal(0)
     
