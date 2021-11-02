@@ -1,5 +1,15 @@
 
-def merge_sort(arr):
+def merge_sort(arr, left_idx, right_idx):
+    
+    if left_idx >= right_idx:
+        return
+
+    mid = (left_idx+right_idx)//2
+    merge_sort(arr, left_idx, mid)
+    merge_sort(arr, mid+1, right_idx)
+    merge(arr, left_idx, right_idx, mid)
+
+def merge(arr, left_idx, right_idx, mid):
     pass
 
 if __name__ == '__main__':
