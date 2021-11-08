@@ -143,9 +143,9 @@ class BinaryTree:
         if root is None:
             return
         else:
-            self._pre_order_traversal(root.left)
+            self._in_order_traversal(root.left)
             print(root.val)
-            self._pre_order_traversal(root.right)
+            self._in_order_traversal(root.right)
 
     def _post_order_traversal(self, root):
         """ performs post-order traversal, right>left>root """
