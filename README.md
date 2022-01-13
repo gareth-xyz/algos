@@ -1,6 +1,6 @@
 # algos
 
-This repo is a collection of of algorithms and data structures that I have implemented. The contents can be seen below:
+This repo is a collection of algorithms and data structures that I have implemented. The contents can be seen below:
 
 ## data structures
 |       | Python  | Javascript | C |
