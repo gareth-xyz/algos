@@ -1,5 +1,6 @@
 '''
 merge sort is an efficient external algorithm, allowing sorting to be distributed in batches
+better suited to large data sets
 
 sorting will always be: 
     O(n*log n) time
